@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 起步</title>
+</head>
+
+<body>
+    <div id="app">{{msg}}</div>
+</body>
+
+</html>
+<script src="vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',//⽬的地
+        data: {
+            //保存数据的地⽅ 
+            msg: 'Hello Vue'
+        }
+    });
+</script>
