@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+</head>
+
+<body>
+    <div id='app'>
+        <div v-if="isShow">
+            显示
+        </div>
+        <div v-else>
+            隐藏
+        </div>
+        <h3 v-show='show'>显示</h3>
+    </div>
+</body>
+
+</html>
+<script src="./vue.js"></script>
+<script>
+    // v-if v-else-if  v-else v-show
+    new Vue({
+        el: '#app',
+        data: {
+            isShow: Math.random() > 0.5,
+            show: true
+        }
+    })
+</script>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐播放</title>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    ul li {
+        margin: 20px 20px;
+        padding: 10px 5px;
+        border-radius: 3px;
+    }
+
+    ul li.active {
+        background-color: #D2E2F3;
+    }
+
+    button {
+        width: 100px;
+        height: 54px;
+    }
+
+    button:hover {
+        background-color: black;
+        color: gold;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <audio :src="musicData[currentMusicIndex].songSrc" controls autoplay @ended="endedNext()"></audio>
+        <button @click="nextMusic()">下一首</button>
+        <ul>
+            <li :class="{active:index===currentMusicIndex}" v-for="(item,index) in musicData" :key="index"
+                @click="clickMusic(item.id)">
+                <h2>{{index+1}}-歌名：{{item.name}}</h2>
+                <p>{{item.author}}</p>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script src="./vue.js"></script>
+<script>
+
+
+    // 数据必须放在前面 new Vue()才能调用
+    const musicData = [{
+        id: 1,
+        name: '葛东琪 - 悬溺',
+        author: '葛东琪',
+        songSrc: 'https://m801.music.126.net/20231015215231/1041659330f8bd506e814a807b8a1c9b/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/30806266631/0056/a859/d328/796b29d9d633083475a01553471f59dd.m4a'
+    },
+    {
+        id: 2,
+        name: '郭顶 - 凄美地',
+        author: '郭顶',
+        songSrc: 'https://m801.music.126.net/20231015215646/0bb9e6b6148a7cf641f348c8e2d83f46/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/28481675611/e2ab/11c3/4e51/f9a2c3718202078e3b34d6859934bed6.m4a'
+    },
+    {
+        id: 3,
+        name: '队长 - 予你',
+        author: '队长',
+        songSrc: 'https://m801.music.126.net/20231015215809/9748533bb2b857a4007dfa6c34b681f6/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/14096416367/a62b/12c7/1d81/eca0d2bdb86e661bdec280974438cc00.m4a'
+    },
+    {
+        id: 4,
+        name: '颜人中 - 我只能离开',
+        author: '颜人中',
+        songSrc: 'https://m10.music.126.net/20231015215858/43f44ad85d0bd4f882a7fbffe15ac570/yyaac/obj/wonDkMOGw6XDiTHCmMOi/14054117422/f17e/5806/f63e/069d22c09a05f7266dac5cc4d8edaa5a.m4a'
+    },
+    {
+        id: 5,
+        name: '烟(许佳豪) - 删了吧',
+        author: '烟(许佳豪)',
+        songSrc: 'https://m801.music.126.net/20231015220039/6d30187b128aee9842b8de850e56cad6/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/14096408893/d114/8138/3ff0/26ccf3485b84b4d4aa052cd527d35d20.m4a'
+
+    },
+    {
+        id: 6,
+        name: '于荣光 - 少林英雄',
+        author: '于荣光',
+        songSrc: './static/于荣光 - 少林英雄.mp3'
+    },
+    {
+        id: 7,
+        name: 'Joel Adams - Please Dont Go',
+        author: 'Joel Adams',
+        songSrc: './static/Joel Adams - Please Dont Go.mp3'
+    },
+    {
+        id: 8,
+        name: 'MKJ - Time',
+        author: 'MKJ',
+        songSrc: './static/MKJ - Time.mp3'
+    },
+    {
+        id: 9,
+        name: 'Russ - Psycho (Pt. 2)',
+        author: 'Russ',
+        songSrc: './static/Russ - Psycho (Pt. 2).mp3'
+    }
+    ];
+
+    new Vue({
+        el: "#app",
+        data: {
+            musicData,
+            currentMusicIndex: 0
+        },
+        methods: {
+            //点击切换
+            clickMusic(index) {
+                this.currentMusicIndex = index - 1;
+            },
+            //下一曲
+            nextMusic() {
+                if (this.currentMusicIndex === this.musicData.length - 1) {
+                    this.currentMusicIndex = 0;
+                } else {
+                    this.currentMusicIndex++;
+                }
+            },
+            endedNext() {
+                this.nextMusic();
+            }
+        },
+    });
+
+</script>
